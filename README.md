@@ -20,8 +20,8 @@ Advanced Image Protector is a Python-based tool designed to protect images from 
 ## Installation
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/advanced-image-protector.git
-   cd advanced-image-protector
+  git clone https://github.com/captainzero93/Protect-Images-from-AI.git
+  cd Protect-Images-from-AI
    ```
 
 2. Set up a virtual environment:
