@@ -1,4 +1,4 @@
-# Advanced Image Protector ( AI Protection )
+# Advanced Image Protector ( PixelGuard AI )
 
 ## Overview
 Advanced Image Protector is a Python-based tool designed to protect images from AI scraping and unauthorized use in AI training, such as facial recognition models or style transfer algorithms. It employs multiple invisible protection techniques that are imperceptible to the human eye but can significantly interfere with AI processing.
