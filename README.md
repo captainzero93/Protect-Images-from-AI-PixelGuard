@@ -1,7 +1,7 @@
-﻿# Advanced Image Protector
+# Advanced Image Protector
 
 ## Overview
-AIP is a Python-based tool designed to protect images from AI scraping and unauthorized use in AI training, such as facial recognition models or style transfer algorithms. It employs multiple invisible protection techniques that are imperceptible to the human eye but can significantly interfere with AI processing.
+Advanced Image Protector is a Python-based tool designed to protect images from AI scraping and unauthorized use in AI training, such as facial recognition models or style transfer algorithms. It employs multiple invisible protection techniques that are imperceptible to the human eye but can significantly interfere with AI processing.
 
 ## Features
 - **Multiple Invisible Protection Techniques**:
@@ -23,13 +23,31 @@ AIP is a Python-based tool designed to protect images from AI scraping and unaut
    git clone https://github.com/yourusername/advanced-image-protector.git
    cd advanced-image-protector
    ```
-2. Install the required dependencies:
+
+2. Set up a virtual environment:
+   - For Windows:
+     ```
+     python -m venv venv
+     venv\Scripts\activate
+     ```
+   - For macOS and Linux:
+     ```
+     python3 -m venv venv
+     source venv/bin/activate
+     ```
+
+3. Install the required dependencies:
    ```
    pip install -r requirements.txt
    ```
 
+4. When you're done working on the project, you can deactivate the virtual environment:
+   ```
+   deactivate
+   ```
+
 ## Usage
-Run the script:
+Activate your virtual environment (if not already activated), then run the script:
 ```
 python advanced_image_protector.py
 ```
