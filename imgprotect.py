@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-from PIL import Image
+from PIL import Image, ImageEnhance
 import os
 import tkinter as tk
 from tkinter import ttk
@@ -15,6 +15,7 @@ import piexif
 from concurrent.futures import ThreadPoolExecutor
 from scipy.fftpack import dct, idct
 import pywt
+import time
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -39,12 +40,15 @@ class AdvancedImageProtector:
 
             # Read image
             image = cv2.imread(image_path)
+            if image is None:
+                return f"Failed to read image: {image_path}"
             
             # Apply multiple protection techniques
             protected_image = self.apply_dct_watermark(image)
             protected_image = self.apply_wavelet_watermark(protected_image)
             protected_image = self.apply_fourier_watermark(protected_image)
             protected_image = self.apply_adversarial_perturbation(protected_image)
+            protected_image = self.apply_color_jittering(protected_image)
 
             # Generate signature and hash
             image_bytes = cv2.imencode('.png', protected_image)[1].tobytes()
@@ -54,7 +58,8 @@ class AdvancedImageProtector:
             # Prepare protection info
             protection_info = {
                 "signature": signature,
-                "image_hash": image_hash
+                "image_hash": image_hash,
+                "timestamp": int(time.time())
             }
 
             # Save the protected image
@@ -142,6 +147,21 @@ class AdvancedImageProtector:
         
         return image_perturbed
 
+    def apply_color_jittering(self, image):
+        logging.debug("Applying color jittering")
+        pil_image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        
+        # Randomly adjust brightness, contrast, and saturation
+        brightness_factor = np.random.uniform(0.8, 1.2)
+        contrast_factor = np.random.uniform(0.8, 1.2)
+        saturation_factor = np.random.uniform(0.8, 1.2)
+        
+        pil_image = ImageEnhance.Brightness(pil_image).enhance(brightness_factor)
+        pil_image = ImageEnhance.Contrast(pil_image).enhance(contrast_factor)
+        pil_image = ImageEnhance.Color(pil_image).enhance(saturation_factor)
+        
+        return cv2.cvtColor(np.array(pil_image), cv2.COLOR_RGB2BGR)
+
     def sign_image(self, image_bytes):
         logging.debug("Signing image")
         signature = self.private_key.sign(
@@ -185,7 +205,15 @@ class AdvancedImageProtector:
                     ),
                     hashes.SHA256()
                 )
-                return "Image signature is valid. The image is authentic."
+                
+                # Check timestamp
+                protection_time = protection_info['timestamp']
+                current_time = int(time.time())
+                time_diff = current_time - protection_time
+                if time_diff > 30 * 24 * 60 * 60:  # 30 days
+                    return f"Image signature is valid, but the protection is {time_diff // (24 * 60 * 60)} days old. Consider re-protecting the image."
+                else:
+                    return f"Image signature is valid. The image is authentic and was protected {time_diff // (24 * 60 * 60)} days ago."
             except:
                 return "Image signature is invalid. The image may have been tampered with."
 
@@ -193,11 +221,15 @@ class AdvancedImageProtector:
             logging.error(f"Error verifying image: {str(e)}", exc_info=True)
             return f"Failed to verify image: {str(e)}"
 
-    def batch_process(self, image_paths, output_dir='protected_images_batch'):
+    def batch_process(self, image_paths, output_dir='protected_images_batch', progress_callback=None):
         os.makedirs(output_dir, exist_ok=True)
-        with ThreadPoolExecutor() as executor:
-            futures = [executor.submit(self.protect_image, image_path, output_dir) for image_path in image_paths]
-            results = [future.result() for future in futures]
+        results = []
+        total_images = len(image_paths)
+        for i, image_path in enumerate(image_paths):
+            result = self.protect_image(image_path, output_dir)
+            results.append(result)
+            if progress_callback:
+                progress_callback((i + 1) / total_images * 100)
         return results
 
 class AdvancedImageProtectorGUI:
@@ -232,7 +264,7 @@ class AdvancedImageProtectorGUI:
             if output_dir:
                 self.progress_var.set(0)
                 self.master.update_idletasks()
-                results = self.protector.batch_process(file_paths, output_dir)
+                results = self.protector.batch_process(file_paths, output_dir, self.update_progress)
                 self.progress_var.set(100)
                 messagebox.showinfo("Batch Result", "\n".join(results))
 
@@ -241,6 +273,10 @@ class AdvancedImageProtectorGUI:
         if file_path:
             result = self.protector.verify_image(file_path)
             messagebox.showinfo("Verification Result", result)
+
+    def update_progress(self, value):
+        self.progress_var.set(value)
+        self.master.update_idletasks()
 
 if __name__ == "__main__":
     root = tk.Tk()
