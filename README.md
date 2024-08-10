@@ -9,7 +9,7 @@ PixelGuard AI is an advanced Python-based tool designed to protect images from A
   - Wavelet-based Watermarking
   - Fourier Transform Watermarking
   - Adversarial Perturbation
-  - Color Jittering
+  - Colour Jittering
   - Invisible QR Code Embedding
   - Steganography
 - **Digital Signature and Hash Verification** for tamper detection
