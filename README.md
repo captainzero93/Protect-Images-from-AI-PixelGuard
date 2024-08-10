@@ -1,7 +1,7 @@
-# Advanced Image Protector ( PixelGuard AI )
+# PixelGuard AI
 
 ## Overview
-Advanced Image Protector is a Python-based tool designed to protect images from AI scraping and unauthorized use in AI training, such as facial recognition models or style transfer algorithms. It employs multiple invisible protection techniques that are imperceptible to the human eye but can significantly interfere with AI processing.
+PixelGuard AI is an advanced Python-based tool designed to protect images from AI scraping and unauthorized use in AI training, such as facial recognition models or style transfer algorithms. It employs multiple invisible protection techniques that are imperceptible to the human eye but can significantly interfere with AI processing.
 
 ## Features
 - **Multiple Invisible Protection Techniques**:
@@ -10,7 +10,10 @@ Advanced Image Protector is a Python-based tool designed to protect images from 
   - Fourier Transform Watermarking
   - Adversarial Perturbation
   - Color Jittering
+  - Invisible QR Code Embedding
+  - Steganography
 - **Digital Signature and Hash Verification** for tamper detection
+- **Perceptual Hash** for content change detection
 - **Timestamp Verification** to check the age of protection
 - **Support for Multiple Image Formats**: JPEG, PNG, BMP, TIFF, WebP
 - **Batch Processing** capability with progress tracking
@@ -20,8 +23,8 @@ Advanced Image Protector is a Python-based tool designed to protect images from 
 ## Installation
 1. Clone this repository:
    ```
-  git clone https://github.com/captainzero93/Protect-Images-from-AI.git
-  cd Protect-Images-from-AI
+   git clone https://github.com/yourusername/PixelGuard-AI.git
+   cd PixelGuard-AI
    ```
 
 2. Set up a virtual environment:
@@ -49,7 +52,7 @@ Advanced Image Protector is a Python-based tool designed to protect images from 
 ## Usage
 Activate your virtual environment (if not already activated), then run the script:
 ```
-python advanced_image_protector.py
+python pixelguard_ai.py
 ```
 This will open a GUI with three main options:
 1. **Protect Single Image**: Select a single image to protect.
@@ -68,15 +71,17 @@ This will open a GUI with three main options:
 3. The tool will check if the image contains protection information, if it has been tampered with, and how long ago it was protected.
 
 ## How It Works
-The Advanced Image Protector uses several techniques to protect images:
+PixelGuard AI uses several techniques to protect images:
 1. **DCT Watermarking**: Embeds a watermark in the frequency domain of the blue channel.
 2. **Wavelet-based Watermarking**: Embeds a watermark in the wavelet domain of the green channel.
 3. **Fourier Transform Watermarking**: Applies a watermark in the frequency domain of the red channel.
 4. **Adversarial Perturbation**: Adds minor perturbations to the image that are designed to confuse AI models.
 5. **Color Jittering**: Randomly adjusts brightness, contrast, and saturation to add another layer of protection.
-6. **Digital Signature**: Signs the entire image to detect any tampering.
-7. **Hash Verification**: Uses a hash to quickly check if the image has been altered.
-8. **Timestamp Verification**: Checks when the image was protected and suggests re-protection if it's too old.
+6. **Invisible QR Code**: Embeds an invisible QR code containing image information.
+7. **Steganography**: Hides additional protection data within the image itself.
+8. **Digital Signature**: Signs the entire image to detect any tampering.
+9. **Hash Verification**: Uses both a cryptographic hash and a perceptual hash to check if the image has been altered.
+10. **Timestamp Verification**: Checks when the image was protected and suggests re-protection if it's too old.
 
 These techniques work together to create multiple layers of protection that are extremely difficult for AI training algorithms to remove or ignore, while remaining imperceptible to human viewers.
 
