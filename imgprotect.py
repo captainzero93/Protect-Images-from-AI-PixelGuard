@@ -16,11 +16,14 @@ from concurrent.futures import ThreadPoolExecutor
 from scipy.fftpack import dct, idct
 import pywt
 import time
+import qrcode
+from stegano import lsb
+import imagehash
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
-class AdvancedImageProtector:
+class PixelGuardAI:
     def __init__(self):
         self.private_key = rsa.generate_private_key(
             public_exponent=65537,
@@ -49,16 +52,20 @@ class AdvancedImageProtector:
             protected_image = self.apply_fourier_watermark(protected_image)
             protected_image = self.apply_adversarial_perturbation(protected_image)
             protected_image = self.apply_color_jittering(protected_image)
+            protected_image = self.apply_invisible_qr(protected_image, image_path)
+            protected_image = self.apply_steganography(protected_image, image_path)
 
-            # Generate signature and hash
+            # Generate signature, hash, and perceptual hash
             image_bytes = cv2.imencode('.png', protected_image)[1].tobytes()
             image_hash = hashlib.sha256(image_bytes).hexdigest()
+            perceptual_hash = str(imagehash.phash(Image.fromarray(cv2.cvtColor(protected_image, cv2.COLOR_BGR2RGB))))
             signature = self.sign_image(image_bytes)
 
             # Prepare protection info
             protection_info = {
                 "signature": signature,
                 "image_hash": image_hash,
+                "perceptual_hash": perceptual_hash,
                 "timestamp": int(time.time())
             }
 
@@ -162,6 +169,30 @@ class AdvancedImageProtector:
         
         return cv2.cvtColor(np.array(pil_image), cv2.COLOR_RGB2BGR)
 
+    def apply_invisible_qr(self, image, image_path):
+        logging.debug("Applying invisible QR code")
+        qr = qrcode.QRCode(version=1, box_size=10, border=5)
+        qr.add_data(f"PixelGuard Protected: {os.path.basename(image_path)}")
+        qr.make(fit=True)
+        qr_image = qr.make_image(fill_color="black", back_color="white")
+        qr_array = np.array(qr_image.convert('L'))
+        qr_array = cv2.resize(qr_array, (image.shape[1], image.shape[0]))
+        
+        alpha = 0.1  # QR code strength
+        image = image.astype(np.float32)
+        image[:,:,0] += alpha * qr_array
+        image[:,:,1] += alpha * qr_array
+        image[:,:,2] += alpha * qr_array
+        
+        return np.clip(image, 0, 255).astype(np.uint8)
+
+    def apply_steganography(self, image, image_path):
+        logging.debug("Applying steganography")
+        secret_message = f"PixelGuard Protected: {os.path.basename(image_path)}"
+        pil_image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        stego_image = lsb.hide(pil_image, secret_message)
+        return cv2.cvtColor(np.array(stego_image), cv2.COLOR_RGB2BGR)
+
     def sign_image(self, image_bytes):
         logging.debug("Signing image")
         signature = self.private_key.sign(
@@ -182,17 +213,23 @@ class AdvancedImageProtector:
                 protection_info = json.loads(exif_dict["0th"].get(piexif.ImageIFD.ImageDescription, "{}"))
 
             if not protection_info:
-                return "This image does not contain protection information."
+                return "This image does not contain PixelGuard protection information."
 
             image = cv2.imread(image_path)
             image_bytes = cv2.imencode('.png', image)[1].tobytes()
             current_hash = hashlib.sha256(image_bytes).hexdigest()
+            current_phash = str(imagehash.phash(Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))))
 
             logging.debug(f"Current image hash: {current_hash}")
             logging.debug(f"Stored image hash: {protection_info['image_hash']}")
+            logging.debug(f"Current perceptual hash: {current_phash}")
+            logging.debug(f"Stored perceptual hash: {protection_info['perceptual_hash']}")
 
             if current_hash != protection_info['image_hash']:
                 return "Image hash mismatch. The image may have been altered."
+
+            if current_phash != protection_info['perceptual_hash']:
+                return "Perceptual hash mismatch. The image content may have been significantly modified."
 
             signature = base64.b64decode(protection_info['signature'].encode('utf-8'))
             try:
@@ -232,11 +269,11 @@ class AdvancedImageProtector:
                 progress_callback((i + 1) / total_images * 100)
         return results
 
-class AdvancedImageProtectorGUI:
+class PixelGuardAIGUI:
     def __init__(self, master):
         self.master = master
-        self.master.title("Advanced Image Protector")
-        self.protector = AdvancedImageProtector()
+        self.master.title("PixelGuard AI")
+        self.protector = PixelGuardAI()
 
         tk.Button(master, text="Protect Single Image", command=self.protect_single_image).grid(row=0, column=0, pady=10)
         tk.Button(master, text="Batch Protect Images", command=self.batch_protect_images).grid(row=1, column=0, pady=10)
@@ -280,5 +317,5 @@ class AdvancedImageProtectorGUI:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = AdvancedImageProtectorGUI(root)
+    app = PixelGuardAIGUI(root)
     root.mainloop()
