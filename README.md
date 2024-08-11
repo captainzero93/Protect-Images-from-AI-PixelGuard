@@ -26,7 +26,7 @@ PixelGuard AI is an advanced Python-based tool designed to protect images from A
    
   git clone https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard.git   
   
-  cd PixelGuard-AI
+  cd Protect-Images-from-AI-PixelGuard
   ``` 
 
 2. Set up a virtual environment:
