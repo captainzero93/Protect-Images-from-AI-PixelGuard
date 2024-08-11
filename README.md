@@ -126,7 +126,7 @@ Please ensure your code adheres to our coding standards and includes appropriate
 While these protection methods significantly increase the difficulty of using the images for AI training, no protection method is perfect. Always be cautious about sharing personal images online.
 
 ## Citation
-If you use PixelGuard AI in your research or project, please cite it as follows:
+If you use PixelGuard AI, as software or protection concepts in your research or projects, please cite it as follows:
 ```
 [captainzero93]. (2024). PixelGuard AI. GitHub. https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard
 ```
