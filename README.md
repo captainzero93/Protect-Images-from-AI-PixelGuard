@@ -43,6 +43,3 @@ If you use PixelGuard AI in your research or project, please cite it as follows:
 [Author Name]. (Year). PixelGuard AI. GitHub. https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard
 <<<<<<< HEAD
 ```
-=======
-```
->>>>>>> fdf65d0 (Update PixelGuard AI with new features and documentation)
