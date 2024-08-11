@@ -95,15 +95,15 @@ These techniques work together to create multiple layers of protection that are 
 
 ## Security Analysis
 
-1. **Robustness**: The combination of multiple techniques provides a strong defense against AI scraping. However, determined adversaries with significant resources might still find ways to remove or bypass some protections. Regular updates to the protection algorithms are recommended to stay ahead of potential threats.
+1. **Robustness**: The combination of multiple techniques provides a strong defense against AI scraping. However, determined adversaries with significant resources might still find ways to remove or bypass some protections. Regular updates to the protection algorithms will help stay ahead of potential threats.
 
-2. **Cryptographic Security**: The use of RSA-2048 for digital signatures provides strong security. However, key management is a potential weak point as keys are generated per session. Future versions may consider implementing a more robust key management system.
+2. **Cryptographic Security**: The use of RSA-2048 for digital signatures provides strong security. However, key management is a potential weak point as keys are generated per session. Future versions could implement a more robust key management system.
 
 3. **Steganography**: The current implementation uses a simple Least Significant Bit (LSB) steganography technique. While effective for casual protection, it may be detectable by advanced statistical analysis. Future versions could implement more sophisticated steganography techniques for increased security.
 
 4. **Reversibility**: Most of the protection techniques applied are not easily reversible. This is generally a positive aspect for security but may be a limitation in some use cases where users need to recover the original, unprotected image.
 
-5. **Perceptual Impact**: While the techniques aim to be imperceptible to humans, there may be slight visual changes, especially at higher protection strengths. Users should balance protection strength with acceptable visual quality.
+5. **Perceptual Impact**: While the techniques aim to be imperceptible to humans, there may ( mostly always ) be slight visual changes, especially at higher protection strengths. Users should balance protection strength with acceptable visual quality.
 
 6. **Metadata Preservation**: The current implementation may not preserve all original image metadata. Future versions could focus on maintaining important metadata while still applying protections.
 
@@ -126,8 +126,6 @@ These techniques work together to create multiple layers of protection that are 
 8. **User Profiles**: Adding the ability to save and load user-defined protection profiles could improve usability for users who frequently protect images with specific requirements.
 
 9. **API Development**: Creating an API for the core functionality could allow for easier integration with other software or web services.
-
-10. **Internationalization**: Adding support for multiple languages in the GUI could make the tool more accessible to a global user base.
 
 ## Updating
 To update PixelGuard AI to the latest version:
