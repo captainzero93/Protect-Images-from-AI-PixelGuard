@@ -80,7 +80,7 @@ This will open a GUI with three main options:
 These techniques work together to create multiple layers of protection that are extremely difficult for AI training algorithms to remove or ignore, while remaining imperceptible to human viewers.
 
 ## Caution
-While these protection methods significantly increase the difficulty of using the images for AI training, no protection method is perfect. Always be cautious about sharing sensitive images online.
+While these protection methods significantly increase the difficulty of using the images for AI training, no protection method is perfect. Always be cautious about sharing personal images online.
 
 ## Contributing
 Contributions to improve the protection techniques or the user interface are welcome. Please open an issue or submit a pull request.
