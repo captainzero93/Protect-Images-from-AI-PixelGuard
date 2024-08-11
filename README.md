@@ -16,7 +16,7 @@ PixelGuard AI is an advanced Python-based tool designed to protect images from A
 - **Perceptual Hash** for content change detection
 - **Timestamp Verification** to check the age of protection
 - **Support for Multiple Image Formats**: JPEG, PNG, BMP, TIFF, WebP
-- **Batch Processing** capability with progress tracking
+- **Batch Processing**
 - **User-friendly GUI** for easy interaction
 - **Verification Tool** to check if an image has been protected and/or tampered with
 
