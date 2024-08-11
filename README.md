@@ -87,8 +87,3 @@ Contributions to improve the protection techniques or the user interface are wel
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## When you're done working on the project, you can deactivate the virtual environment:
-   ```
-   deactivate
-   ```
