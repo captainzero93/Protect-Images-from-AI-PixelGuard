@@ -115,7 +115,7 @@ These techniques work together to create multiple layers of protection that are 
 
 3. **GPU Acceleration**: Given the computational intensity of some protection techniques, implementing GPU acceleration could significantly improve performance, especially for batch processing of large images.
 
-4. **Adaptive Protection**: Developing a system that analyzes images and automatically adjusts protection strength based on content could optimize the balance between protection effectiveness and visual quality.
+4. **Adaptive Protection**: Developing a system that analyzes images and automatically adjusts protection strength based on content may optimize the balance between protection effectiveness and visual quality.
 
 5. **Comprehensive Testing Suite**: Adding a suite of unit and integration tests would improve reliability, ease future development, and help quickly identify any regressions when making updates.
 
@@ -123,9 +123,7 @@ These techniques work together to create multiple layers of protection that are 
 
 7. **Machine Learning Integration**: Incorporating machine learning models to detect and adapt to new AI scraping techniques could provide more dynamic and future-proof protection.
 
-8. **User Profiles**: Adding the ability to save and load user-defined protection profiles could improve usability for users who frequently protect images with specific requirements.
-
-9. **API Development**: Creating an API for the core functionality could allow for easier integration with other software or web services.
+8. **API Development**: Creating an API for the core functionality could allow for easier integration with other software or web services.
 
 ## Updating
 To update PixelGuard AI to the latest version:
