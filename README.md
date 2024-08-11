@@ -128,7 +128,7 @@ While these protection methods significantly increase the difficulty of using th
 ## Citation
 If you use PixelGuard AI in your research or project, please cite it as follows:
 ```
-[Author Name]. (Year). PixelGuard AI. GitHub. https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard
+[captainzero93]. (2024). PixelGuard AI. GitHub. https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard
 ```
 
 ## License
