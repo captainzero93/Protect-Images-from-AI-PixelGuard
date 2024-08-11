@@ -21,17 +21,22 @@ AI scraping involves the automated collection of images from the internet for tr
 - **Verification Tool** to check if an image has been protected and/or tampered with
 
 ## System Requirements
-- Python 3.7 or higher
+- Python 3.7 or higher, but Python <= 3.11 is required
 - Compatible with Windows, macOS, and Linux
 
 ## Installation
-1. Clone this repository:
+1. Ensure you have Python 3.7 - 3.11 installed. Python 3.11 is the latest supported version. You can check your Python version by running:
+   ```
+   python --version
+   ```
+
+2. Clone this repository:
    ```
    git clone https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard.git
    cd Protect-Images-from-AI-PixelGuard
    ```
 
-2. Set up a virtual environment:
+3. Set up a virtual environment:
    - For Windows:
      ```
      python -m venv venv
@@ -43,10 +48,12 @@ AI scraping involves the automated collection of images from the internet for tr
      source venv/bin/activate
      ```
 
-3. Install the required dependencies:
+4. Install the required dependencies:
    ```
    pip install -r requirements.txt
    ```
+
+Note: This project is not compatible with Python 3.12 or later due to dependency constraints. Please use Python 3.11 or earlier.
 
 ## Usage
 Activate your virtual environment (if not already activated), then run the script:
