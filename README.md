@@ -39,7 +39,7 @@ PixelGuard AI is an advanced Python-based tool designed to protect images from A
      source venv/bin/activate
      ```
 
-3. Install the required dependencies:
+3. Install the required dependencies ( since I specified specific package versions it is vest to use VENV ):
    ```
    pip install -r requirements.txt
    ```
