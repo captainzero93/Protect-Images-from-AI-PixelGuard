@@ -123,7 +123,7 @@ These techniques work together to create multiple layers of protection that are 
 
 7. **Machine Learning Integration**: Incorporating machine learning models to detect and adapt to new AI scraping techniques could provide more dynamic and future-proof protection.
 
-8. **API Development**: Creating an API for the core functionality could allow for easier integration with other software or web services.
+8. **API Development**: Creating an API for the core functionality would allow for easier integration with other software or web services.
 
 ## Updating
 To update PixelGuard AI to the latest version:
