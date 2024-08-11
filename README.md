@@ -4,7 +4,7 @@
 AI scraping involves the automated collection of images from the internet for training AI models. This practice can lead to unauthorized use of personal or copyrighted images. PixelGuard AI aims to protect your images from such scraping by applying various invisible techniques that interfere with AI processing while preserving the visual quality for human viewers (as much as possible).
 
 ## Features
-- **Multiple Invisible Protection Techniques**:
+- **Multiple 'Invisible' Protection Techniques**:
   - DCT (Discrete Cosine Transform) Watermarking
   - Wavelet-based Watermarking
   - Fourier Transform Watermarking
