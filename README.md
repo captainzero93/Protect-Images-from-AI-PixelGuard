@@ -43,12 +43,7 @@ PixelGuard AI is an advanced Python-based tool designed to protect images from A
    ```
    pip install -r requirements.txt
    ```
-
-4. When you're done working on the project, you can deactivate the virtual environment:
-   ```
-   deactivate
-   ```
-
+   
 ## Usage
 Activate your virtual environment (if not already activated), then run the script:
 ```
@@ -92,3 +87,8 @@ Contributions to improve the protection techniques or the user interface are wel
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## When you're done working on the project, you can deactivate the virtual environment:
+   ```
+   deactivate
+   ```
