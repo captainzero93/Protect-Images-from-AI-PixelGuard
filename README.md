@@ -71,7 +71,6 @@ This will open a GUI with three main options:
 3. The tool will check if the image contains protection information, if it has been tampered with, and how long ago it was protected.
 
 ## How It Works
-PixelGuard AI uses several techniques to protect images:
 1. **DCT Watermarking**: Embeds a watermark in the frequency domain of the blue channel.
 2. **Wavelet-based Watermarking**: Embeds a watermark in the wavelet domain of the green channel.
 3. **Fourier Transform Watermarking**: Applies a watermark in the frequency domain of the red channel.
