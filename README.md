@@ -1,4 +1,4 @@
-# PixelGuard AI
+# PixelGuard AI ( AI IMAGE PROTECT )
 
 ## Overview
 PixelGuard AI is an advanced Python-based tool designed to protect images from AI scraping and unauthorized use in AI training, such as facial recognition models or style transfer algorithms. It employs multiple invisible protection techniques that are imperceptible to the human eye but can significantly interfere with AI processing.
