@@ -52,7 +52,7 @@ PixelGuard AI is an advanced Python-based tool designed to protect images from A
 ## Usage
 Activate your virtual environment (if not already activated), then run the script:
 ```
-python pixelguard_ai.py
+python imgprotect.py
 ```
 This will open a GUI with three main options:
 1. **Protect Single Image**: Select a single image to protect.
