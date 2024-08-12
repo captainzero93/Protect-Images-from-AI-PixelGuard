@@ -1,17 +1,15 @@
 import numpy as np
 import cv2
 from PIL import Image
+from PIL.PngImagePlugin import PngInfo
 import os
-import tkinter as tk
-from tkinter import ttk, filedialog, messagebox, IntVar, DoubleVar
+import logging
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding, rsa
 import base64
 import json
-import logging
 import hashlib
 import piexif
-from concurrent.futures import ThreadPoolExecutor
 from scipy.fftpack import dct, idct
 import pywt
 import qrcode
@@ -37,8 +35,16 @@ class AdvancedImageProtector:
             if file_extension not in self.supported_formats:
                 return f"Unsupported file format: {file_extension}"
 
-            # Read image
-            image = cv2.imread(image_path)
+            # Read image using PIL to ensure consistency
+            with Image.open(image_path) as img:
+                image = np.array(img)
+                if len(image.shape) == 2:  # Convert grayscale to RGB
+                    image = np.stack((image,)*3, axis=-1)
+                elif image.shape[2] == 4:  # Remove alpha channel if present
+                    image = image[:,:,:3]
+            
+            # Convert to BGR for OpenCV operations
+            image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
             
             # Apply multiple protection techniques with custom strengths
             protected_image = self.apply_dct_watermark(image, strength=dct_strength)
@@ -63,15 +69,21 @@ class AdvancedImageProtector:
             # Save the protected image
             final_image_path = os.path.join(output_dir, f'protected_{os.path.basename(image_path)}')
             
-            # Convert back to PIL Image for saving with EXIF
+            # Convert back to PIL Image for saving
             pil_image = Image.fromarray(cv2.cvtColor(protected_image, cv2.COLOR_BGR2RGB))
             
-            # Embed protection info in EXIF
-            exif_dict = {"0th": {}, "Exif": {}, "GPS": {}, "1st": {}, "thumbnail": None}
-            exif_dict["0th"][piexif.ImageIFD.ImageDescription] = json.dumps(protection_info)
-            exif_bytes = piexif.dump(exif_dict)
-
-            pil_image.save(final_image_path, exif=exif_bytes)
+            # Embed protection info based on file type
+            if file_extension.lower() in ['.jpg', '.jpeg']:
+                # For JPEG, use EXIF
+                exif_dict = {"0th": {}, "Exif": {}, "GPS": {}, "1st": {}, "thumbnail": None}
+                exif_dict["0th"][piexif.ImageIFD.ImageDescription] = json.dumps(protection_info)
+                exif_bytes = piexif.dump(exif_dict)
+                pil_image.save(final_image_path, exif=exif_bytes)
+            else:
+                # For other formats (including PNG), use metadata
+                metadata = PngInfo()
+                metadata.add_text("Description", json.dumps(protection_info))
+                pil_image.save(final_image_path, pnginfo=metadata)
 
             logging.debug(f"Saved protected image with embedded info: {final_image_path}")
 
@@ -211,13 +223,28 @@ class AdvancedImageProtector:
         logging.debug(f"Verifying image: {image_path}")
         try:
             with Image.open(image_path) as img:
-                exif_dict = piexif.load(img.info.get("exif", b""))
-                protection_info = json.loads(exif_dict["0th"].get(piexif.ImageIFD.ImageDescription, "{}"))
+                # Check if the image has EXIF data
+                if "exif" in img.info:
+                    exif_dict = piexif.load(img.info["exif"])
+                    protection_info = json.loads(exif_dict["0th"].get(piexif.ImageIFD.ImageDescription, "{}"))
+                else:
+                    # For PNG files or images without EXIF, try to get the protection info from metadata
+                    protection_info = json.loads(img.info.get("Description", "{}"))
 
             if not protection_info:
                 return "This image does not contain protection information."
 
-            image = cv2.imread(image_path)
+            # Read image using PIL to ensure consistency with protection process
+            with Image.open(image_path) as img:
+                image = np.array(img)
+                if len(image.shape) == 2:  # Convert grayscale to RGB
+                    image = np.stack((image,)*3, axis=-1)
+                elif image.shape[2] == 4:  # Remove alpha channel if present
+                    image = image[:,:,:3]
+            
+            # Convert to BGR for OpenCV operations
+            image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+
             image_bytes = cv2.imencode('.png', image)[1].tobytes()
             current_hash = hashlib.sha256(image_bytes).hexdigest()
 
