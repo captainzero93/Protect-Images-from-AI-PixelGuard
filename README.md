@@ -113,7 +113,7 @@ These techniques work together to create multiple layers of protection that are 
 
 2. **Advanced Steganography**: Implementing more sophisticated steganography techniques could improve the hiding of metadata and increase resistance to statistical analysis.
 
-3. **GPU Acceleration**: Given the computational intensity of some protection techniques, implementing GPU acceleration could significantly improve performance, especially for batch processing of large images.
+3. **GPU Acceleration and Multi-Threadding**: Given the computational intensity of some protection techniques, implementing GPU acceleration could significantly improve performance, especially for batch processing of large images.
 
 4. **Adaptive Protection**: Developing a system that analyzes images and automatically adjusts protection strength based on content may optimize the balance between protection effectiveness and visual quality.
 
