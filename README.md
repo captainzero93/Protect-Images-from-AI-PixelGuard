@@ -53,7 +53,7 @@ AI scraping involves the automated collection of images from the internet for tr
    pip install -r requirements.txt
    ```
 
-Again: This project is not currently compatible with Python 3.12 or later due to dependency constraints. Please use Python 3.11 or earlier.
+Again: This project is not currently compatible with Python 3.12 or later due to dependency constraints. Please use Python 3.11 or earlier ( not before 3.7) .
 
 ## Usage
 Activate your virtual environment (if not already activated), then run the script:
