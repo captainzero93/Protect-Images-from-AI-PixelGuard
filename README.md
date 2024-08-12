@@ -10,7 +10,7 @@ AI scraping involves the automated collection of images from the internet for tr
   - Fourier Transform Watermarking
   - Adversarial Perturbation
   - Colour Jittering
-  - Invisible QR Code Embedding
+  - 'Invisible' QR Code Embedding
   - Steganography
 - **Digital Signature and Hash Verification** for tamper detection
 - **Perceptual Hash** for content change detection
