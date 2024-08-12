@@ -121,7 +121,7 @@ These techniques work together to create multiple layers of protection that are 
 
 6. **Enhanced Key Management**: Implementing a more robust key management system could improve the overall security of the cryptographic operations.
 
-7. **Machine Learning Integration**: Incorporating machine learning models to detect and adapt to new AI scraping techniques could provide more dynamic and future-proof protection.
+7. **Machine Learning Integration**: Incorporating machine learning models to detect and adapt to new AI scraping techniques could provide more dynamic protection.
 
 8. **API Development**: Creating an API for the core functionality would allow for easier integration with other software or web services.
 
