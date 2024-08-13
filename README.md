@@ -9,7 +9,7 @@ Here's an example of PixelGuard AI in action:
 
 | Unprotected Image | Protected Image |
 |:-----------------:|:---------------:|
-| ![Unprotected](efcsdzecvzdscz.png) | ![Protected](protected_efcsdzecvzdscz.png) |
+| ![Unprotected](https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard/raw/main/efcsdzecvzdscz.png) | ![Protected](https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard/raw/main/protected_efcsdzecvzdscz.png) |
 
 As you can see, the protected image looks virtually identical to the human eye, but contains invisible protections against AI scraping and processing.
 
@@ -29,8 +29,6 @@ As you can see, the protected image looks virtually identical to the human eye, 
 - **Batch Processing**
 - **User-friendly GUI** for easy interaction
 - **Verification Tool** to check if an image has been protected and/or tampered with
-
-... [rest of the README content] ...
 
 ## System Requirements
 - Python 3.7 or higher, but Python <= 3.11 is required
