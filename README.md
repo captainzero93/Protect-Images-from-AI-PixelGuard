@@ -127,7 +127,7 @@ These techniques work together to create multiple layers of protection that are 
 
 ## Updating
 To update PixelGuard AI to the latest version:
-1. Pull the latest changes from the repository:
+1. Pull the latest changes from the repository in the correct folder with VENV acticated if needed:
    ```
    git pull origin main
    ```
