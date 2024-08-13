@@ -139,7 +139,7 @@ To update PixelGuard AI to the latest version:
 ## Troubleshooting
 - If you encounter "ModuleNotFoundError", ensure all dependencies are correctly installed.
 - For image format errors, check that your image is in one of the supported formats.
-- If protection seems too strong or weak, adjust the settings using the GUI sliders. ( Some efffects are far more visible thsn others)
+- If protection seems too strong or weak, adjust the settings using the GUI sliders. ( Some protection methods are far more visible than others to the human eye. )
 
 ## Limitations
 While PixelGuard AI significantly increases protection against AI scraping, it may not be 100% effective against all current and future AI technologies. It's designed to strike a balance between protection and maintaining image quality.
