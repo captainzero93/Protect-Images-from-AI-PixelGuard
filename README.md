@@ -3,6 +3,16 @@
 ## Introduction
 AI scraping involves the automated collection of images from the internet for training AI models. This practice can lead to unauthorized use of personal or copyrighted images. PixelGuard AI aims to protect your images from such scraping and other AI training (like 'deepfakes') by applying various invisible techniques that interfere with AI processing while preserving the visual quality for human viewers (as much as possible).
 
+## Example Results
+
+Here's an example of PixelGuard AI in action:
+
+| Unprotected Image | Protected Image |
+|:-----------------:|:---------------:|
+| ![Unprotected](efcsdzecvzdscz.png) | ![Protected](protected_efcsdzecvzdscz.png) |
+
+As you can see, the protected image looks virtually identical to the human eye, but contains invisible protections against AI scraping and processing.
+
 ## Features
 - **Multiple 'Invisible' Protection Techniques**:
   - DCT (Discrete Cosine Transform) Watermarking
@@ -19,6 +29,8 @@ AI scraping involves the automated collection of images from the internet for tr
 - **Batch Processing**
 - **User-friendly GUI** for easy interaction
 - **Verification Tool** to check if an image has been protected and/or tampered with
+
+... [rest of the README content] ...
 
 ## System Requirements
 - Python 3.7 or higher, but Python <= 3.11 is required
