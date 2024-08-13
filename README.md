@@ -164,4 +164,15 @@ If you use PixelGuard AI, as software or protection concepts in your research or
 ```
 
 ## License
-This project is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). Please check the additional terms. See the [LICENSE](LICENSE) file for details.
+
+This project is available under a dual license:
+
+1. **Non-Commercial Use**: For non-commercial purposes, this project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). This allows for sharing and adaptation of the code for non-commercial purposes, with appropriate attribution.
+
+2. **Commercial Use**: Any commercial use, including but not limited to selling the code, using it in commercial products or services, or any revenue-generating activities, requires a separate commercial license. You must contact the project owner to discuss terms and potential payment.
+
+Please see the [LICENSE](LICENSE) file for full details on both licenses.
+
+For commercial licensing inquiries, please contact: joe.faulkner.0@gmail.com
+
+By using this project, you agree to abide by the terms of the appropriate license based on your intended use.
