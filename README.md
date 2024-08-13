@@ -11,7 +11,7 @@ Here's an example of PixelGuard AI in action:
 |:-----------------:|:---------------:|
 | ![Unprotected](https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard/raw/main/efcsdzecvzdscz.png) | ![Protected](https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard/raw/main/protected_efcsdzecvzdscz.png) |
 
-As you can see, the protected image looks virtually identical to the human eye, but contains invisible protections against AI scraping and processing.
+As you can see, the protected image looks almost identical to the human eye, but contains invisible protections against AI scraping and processing. This software allows all functions to be set by level.
 
 ## Features
 - **Multiple 'Invisible' Protection Techniques**:
