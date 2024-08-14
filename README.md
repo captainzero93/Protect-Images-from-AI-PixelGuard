@@ -29,7 +29,7 @@ Example images do not represent the current protection level ( especially after 
 - **Batch Processing** with progress tracking and cancellation option
 - **User-friendly GUI** with adjustable protection strengths
 - **Verification Tool** to check if an image has been protected and/or tampered with
-- **EXIF Data Preservation** for JPEG images
+- **EXIF Data Preservation** where possible.
 
 ## System Requirements
 - Python 3.7 or higher, but Python <= 3.11 is required
