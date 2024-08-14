@@ -11,7 +11,7 @@ Here's an example of an earlier version of PixelGuard AI:
 |:-----------------:|:---------------:|
 | ![Unprotected](https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard/raw/main/efcsdzecvzdscz.png) | ![Early version Protected](https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard/raw/main/protected_efcsdzecvzdscz.png) |
 
-Example images do not represent the current protection level. This program is being updated and improved. This software allows all functions to be set by level before processing.
+Example images do not represent the current protection level ( especially after 14/08/24) new images will be uploaded soon. This program is being updated and improved. This software allows all functions to be set by level before processing.
 
 ## Features
 - **Multiple 'Invisible' Protection Techniques**:
