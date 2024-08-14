@@ -119,15 +119,10 @@ These techniques work together to create multiple layers of protection that are 
 ## Security Analysis
 
 1. **Robustness**: The combination of multiple techniques provides a strong defense against AI scraping. However, determined adversaries with significant resources might still find ways to remove or bypass some protections. Regular updates to the protection algorithms will help stay ahead of potential threats.
-
 2. **Cryptographic Security**: The use of RSA-2048 for digital signatures provides strong security. However, key management is a potential weak point as keys are generated per session. Future versions could implement a more robust key management system.
-
 3. **Steganography**: The current implementation uses a simple Least Significant Bit (LSB) steganography technique. While effective for casual protection, it may be detectable by advanced statistical analysis. Future versions could implement more sophisticated steganography techniques for increased security.
-
 4. **Reversibility**: Most of the protection techniques applied are not easily reversible. This is generally a positive aspect for security but may be a limitation in some use cases where users need to recover the original, unprotected image.
-
 5. **Perceptual Impact**: While the techniques aim to be imperceptible to humans, there may (mostly always) be slight visual changes, especially at higher protection strengths. Users should balance protection strength with acceptable visual quality.
-
 6. **Metadata Preservation**: The current implementation preserves some EXIF data for images. However, not all metadata may be preserved for other formats. Future versions could focus on maintaining more metadata across all supported formats while still applying protections.
 
 ## Potential Improvements
