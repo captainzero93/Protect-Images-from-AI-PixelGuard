@@ -340,17 +340,14 @@ if __name__ == "__main__":
     protector = AdvancedImageProtector()
     
     # Protect a single image
-    # Uncomment the lines below to use this functionality
     # result = protector.protect_image("path/to/your/image.jpg")
     # print(result)
     
     # Verify a protected image
-    # Uncomment the lines below to use this functionality
     # verification_result = protector.verify_image("path/to/protected_image.png")
     # print(verification_result)
     
     # Batch process images
-    # Uncomment the lines below to use this functionality
     # image_paths = ["path/to/image1.jpg", "path/to/image2.png", "path/to/image3.jpeg"]
     # for progress in protector.batch_process(image_paths):
     #     print(f"Progress: {progress * 100:.2f}%")
