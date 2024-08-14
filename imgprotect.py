@@ -59,6 +59,7 @@ class AdvancedImageProtector:
 
             # Read image using PIL to ensure consistency
             with Image.open(image_path) as img:
+                original_exif = img.info.get('exif', b'')
                 image = np.array(img)
                 if len(image.shape) == 2:  # Convert grayscale to RGB
                     image = np.stack((image,)*3, axis=-1)
@@ -100,7 +101,7 @@ class AdvancedImageProtector:
             # Embed protection info based on file type
             if file_extension.lower() in ['.jpg', '.jpeg']:
                 # For JPEG, use EXIF
-                exif_dict = {"0th": {}, "Exif": {}, "GPS": {}, "1st": {}, "thumbnail": None}
+                exif_dict = piexif.load(original_exif)
                 exif_dict["0th"][piexif.ImageIFD.ImageDescription] = json.dumps(protection_info)
                 exif_bytes = piexif.dump(exif_dict)
                 pil_image.save(final_image_path, exif=exif_bytes, quality=95)
@@ -331,9 +332,12 @@ class AdvancedImageProtector:
 
     def batch_process(self, image_paths, output_dir='protected_images_batch', **kwargs):
         os.makedirs(output_dir, exist_ok=True)
-        with ThreadPoolExecutor() as executor:
-            futures = [executor.submit(self.protect_image, image_path, output_dir, **kwargs) for image_path in image_paths]
-            results = [future.result() for future in futures]
+        total_images = len(image_paths)
+        results = []
+        for i, image_path in enumerate(image_paths):
+            result = self.protect_image(image_path, output_dir, **kwargs)
+            results.append(result)
+            yield (i + 1) / total_images  # Yield progress
         return results
 
 class AdvancedImageProtectorGUI:
@@ -385,9 +389,16 @@ class AdvancedImageProtectorGUI:
         ttk.Button(master, text="Verify Image", command=self.verify_image).grid(row=2, column=2, pady=10)
 
         # Progress bar
-        self.progress_var = IntVar()
+        self.progress_var = DoubleVar()
         self.progress_bar = ttk.Progressbar(master, variable=self.progress_var, maximum=100)
         self.progress_bar.grid(row=3, column=0, columnspan=3, pady=10, sticky="ew")
+
+        # Cancel button (hidden by default)
+        self.cancel_button = ttk.Button(master, text="Cancel", command=self.cancel_operation)
+        self.cancel_button.grid(row=4, column=1, pady=10)
+        self.cancel_button.grid_remove()
+
+        self.operation_cancelled = False
 
     def set_recommended(self):
         self.dct_strength.set(0.05)
@@ -435,8 +446,11 @@ class AdvancedImageProtectorGUI:
             output_dir = filedialog.askdirectory(title="Select Output Directory")
             if output_dir:
                 self.progress_var.set(0)
+                self.cancel_button.grid()
+                self.operation_cancelled = False
                 self.master.update_idletasks()
-                results = self.protector.batch_process(
+                
+                batch_process_generator = self.protector.batch_process(
                     file_paths, 
                     output_dir,
                     dct_strength=self.dct_strength.get(),
@@ -445,14 +459,29 @@ class AdvancedImageProtectorGUI:
                     adversarial_strength=self.adversarial_strength.get(),
                     qr_opacity=self.qr_opacity.get()
                 )
+                
+                results = []
+                for progress in batch_process_generator:
+                    if self.operation_cancelled:
+                        messagebox.showinfo("Operation Cancelled", "Batch protection was cancelled.")
+                        break
+                    self.progress_var.set(progress * 100)
+                    self.master.update_idletasks()
+                    results.append(progress)
+                
                 self.progress_var.set(100)
-                messagebox.showinfo("Batch Result", "\n".join(results))
+                self.cancel_button.grid_remove()
+                if not self.operation_cancelled:
+                    messagebox.showinfo("Batch Result", f"Processed {len(results)} images.")
 
     def verify_image(self):
         file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg *.jpeg *.png *.bmp *.tiff *.webp")])
         if file_path:
             result = self.protector.verify_image(file_path)
             messagebox.showinfo("Verification Result", result)
+
+    def cancel_operation(self):
+        self.operation_cancelled = True
 
 if __name__ == "__main__":
     root = tk.Tk()
