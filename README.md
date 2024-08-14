@@ -1,4 +1,3 @@
-# warning code is being updated massively atm and may not work at all, please check back in a few hours
 # PixelGuard AI (AI IMAGE PROTECT)
 
 ## Introduction
@@ -8,18 +7,18 @@ AI scraping involves the automated collection of images from the internet for tr
 
 Here's an example of PixelGuard AI in action:
 
-| Unprotected Image | Protected Image ( light preset) |
+| Unprotected Image | Protected Image (light preset) |
 |:-----------------:|:---------------:|
 | ![Unprotected](https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard/raw/main/efcsdzecvzdscz.png) | ![Protected](https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard/raw/main/protected_efcsdzecvzdscz.png) |
 
-Example images do not represent the current protection level this program is being updated and improved. This software allows all functions to be set by level before processing.
+Example images do not represent the current protection level. This program is being updated and improved. This software allows all functions to be set by level before processing.
 
 ## Features
 - **Multiple 'Invisible' Protection Techniques**:
   - DCT (Discrete Cosine Transform) Watermarking
   - Wavelet-based Watermarking
   - Fourier Transform Watermarking
-  - Adversarial Perturbation
+  - Adversarial Perturbation (using Fast Gradient Sign Method)
   - Colour Jittering
   - Invisible QR Code Embedding
   - Steganography
@@ -28,12 +27,13 @@ Example images do not represent the current protection level this program is bei
 - **Timestamp Verification** to check the age of protection
 - **Support for Multiple Image Formats**: JPEG, PNG, BMP, TIFF, WebP
 - **Batch Processing**
-- **User-friendly GUI** for easy interaction
+- **User-friendly GUI** with adjustable protection strengths
 - **Verification Tool** to check if an image has been protected and/or tampered with
 
 ## System Requirements
 - Python 3.7 or higher, but Python <= 3.11 is required
 - Compatible with Windows, macOS, and Linux
+- CUDA-enabled GPU (optional, for improved performance)
 
 ## Installation
 1. Ensure you have Python 3.7 - 3.11 installed. Python 3.11 is the latest supported version. You can check your Python version by running:
@@ -64,23 +64,24 @@ Example images do not represent the current protection level this program is bei
    pip install -r requirements.txt
    ```
 
-Again: This project is not currently compatible with Python 3.12 or later due to dependency constraints. Please use Python 3.11 or earlier.
+This project is not currently compatible with Python 3.12 or later due to dependency constraints. Please use Python 3.11 or earlier.
 
 ## Usage
 Activate your virtual environment (if not already activated), then run the script:
 ```
 python imgprotect.py
 ```
-This will open a GUI with three main options:
+This will open a GUI with the following options:
 1. **Protect Single Image**: Select a single image to protect.
 2. **Batch Protect Images**: Select multiple images to protect in batch.
 3. **Verify Image**: Check if an image has been protected and if it has been tampered with.
 
 ### Protecting Images
-1. Click on "Protect Single Image" or "Batch Protect Images".
-2. Select the image(s) you want to protect.
-3. Choose an output directory for the protected images.
-4. Wait for the process to complete. A success message will appear when done.
+1. Adjust the protection settings using the sliders or select a preset (Recommended, Lighter, or Stronger).
+2. Click on "Protect Single Image" or "Batch Protect Images".
+3. Select the image(s) you want to protect.
+4. Choose an output directory for the protected images.
+5. Wait for the process to complete. A success message will appear when done.
 
 ### Verifying Images
 1. Click on "Verify Image".
@@ -88,13 +89,13 @@ This will open a GUI with three main options:
 3. The tool will check if the image contains protection information, if it has been tampered with, and how long ago it was protected.
 
 ## Customization
-The GUI allows users to adjust the strength of each protection technique. Use the sliders to fine-tune the balance between protection effectiveness and image quality.
+The GUI allows users to adjust the strength of each protection technique. Use the sliders to fine-tune the balance between protection effectiveness and image quality. You can also use the preset buttons for quick adjustments.
 
 ## How It Works
 1. **DCT Watermarking**: Embeds a watermark in the frequency domain of the blue channel.
 2. **Wavelet-based Watermarking**: Embeds a watermark in the wavelet domain of the green channel.
 3. **Fourier Transform Watermarking**: Applies a watermark in the frequency domain of the red channel.
-4. **Adversarial Perturbation**: Adds minor perturbations to the image that are designed to confuse AI models.
+4. **Adversarial Perturbation**: Uses the Fast Gradient Sign Method (FGSM) with a pre-trained ResNet50 model to add minor perturbations designed to confuse AI models.
 5. **Color Jittering**: Randomly adjusts brightness, contrast, and saturation to add another layer of protection.
 6. **Invisible QR Code**: Embeds an invisible QR code containing image information.
 7. **Steganography**: Hides additional protection data within the image itself.
@@ -114,7 +115,7 @@ These techniques work together to create multiple layers of protection that are 
 
 4. **Reversibility**: Most of the protection techniques applied are not easily reversible. This is generally a positive aspect for security but may be a limitation in some use cases where users need to recover the original, unprotected image.
 
-5. **Perceptual Impact**: While the techniques aim to be imperceptible to humans, there may ( mostly always ) be slight visual changes, especially at higher protection strengths. Users should balance protection strength with acceptable visual quality.
+5. **Perceptual Impact**: While the techniques aim to be imperceptible to humans, there may (mostly always) be slight visual changes, especially at higher protection strengths. Users should balance protection strength with acceptable visual quality.
 
 6. **Metadata Preservation**: The current implementation may not preserve all original image metadata. Future versions could focus on maintaining important metadata while still applying protections.
 
@@ -124,7 +125,7 @@ These techniques work together to create multiple layers of protection that are 
 
 2. **Advanced Steganography**: Implementing more sophisticated steganography techniques could improve the hiding of metadata and increase resistance to statistical analysis.
 
-3. **GPU Acceleration**: Given the computational intensity of some protection techniques, implementing GPU acceleration could significantly improve performance, especially for batch processing of large images.
+3. **Enhanced GPU Utilization**: While the current version can use GPU acceleration if available, further optimizations could be made to improve performance on both CPU and GPU systems.
 
 4. **Adaptive Protection**: Developing a system that analyzes images and automatically adjusts protection strength based on content may optimize the balance between protection effectiveness and visual quality.
 
@@ -151,6 +152,7 @@ To update PixelGuard AI to the latest version:
 - If you encounter "ModuleNotFoundError", ensure all dependencies are correctly installed.
 - For image format errors, check that your image is in one of the supported formats.
 - If protection seems too strong or weak, adjust the settings using the GUI sliders.
+- If the protection process is slow, consider using a system with a CUDA-enabled GPU for faster processing, especially for batch operations.
 
 ## Limitations
 While PixelGuard AI significantly increases protection against AI scraping, it may not be 100% effective against all current and future AI technologies. It's designed to strike a balance between protection and maintaining image quality.
