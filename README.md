@@ -81,7 +81,7 @@ This will open a GUI with the following options:
 2. Click on "Protect Single Image" or "Batch Protect Images".
 3. Select the image(s) you want to protect.
 4. Choose an output directory for the protected images.
-5. Wait for the process to complete. A success message will appear when done.
+5. Wait for the process to complete. A success should appear when done, check the Terminal if not.
 
 ### Verifying Images
 1. Click on "Verify Image".
