@@ -13,17 +13,13 @@ import piexif
 from scipy.fftpack import dct, idct
 import pywt
 import qrcode
-import tkinter as tk
-from tkinter import ttk, filedialog, messagebox
-from tkinter import DoubleVar, IntVar
-from concurrent.futures import ThreadPoolExecutor
+import uuid
 import imagehash
 from datetime import datetime, timedelta
 import torch
 import torchvision.models as models
 import torchvision.transforms as transforms
 
-# Set up logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class AdvancedImageProtector:
@@ -340,150 +336,19 @@ class AdvancedImageProtector:
             yield (i + 1) / total_images  # Yield progress
         return results
 
-class AdvancedImageProtectorGUI:
-    def __init__(self, master):
-        self.master = master
-        self.master.title("PixelGuard AI - Advanced Image Protector")
-        self.protector = AdvancedImageProtector()
-
-        # Create a frame for the sliders
-        self.settings_frame = ttk.LabelFrame(master, text="Protection Settings")
-        self.settings_frame.grid(row=0, column=0, columnspan=3, padx=10, pady=10, sticky="nsew")
-
-        # DCT Watermark Strength
-        ttk.Label(self.settings_frame, text="DCT Watermark Strength:").grid(row=0, column=0, sticky="w")
-        self.dct_strength = DoubleVar(value=0.05)
-        ttk.Scale(self.settings_frame, from_=0.01, to=0.1, variable=self.dct_strength, orient="horizontal").grid(row=0, column=1, sticky="ew")
-
-        # Wavelet Watermark Strength
-        ttk.Label(self.settings_frame, text="Wavelet Watermark Strength:").grid(row=1, column=0, sticky="w")
-        self.wavelet_strength = DoubleVar(value=0.05)
-        ttk.Scale(self.settings_frame, from_=0.01, to=0.1, variable=self.wavelet_strength, orient="horizontal").grid(row=1, column=1, sticky="ew")
-
-        # Fourier Watermark Strength
-        ttk.Label(self.settings_frame, text="Fourier Watermark Strength:").grid(row=2, column=0, sticky="w")
-        self.fourier_strength = DoubleVar(value=0.05)
-        ttk.Scale(self.settings_frame, from_=0.01, to=0.1, variable=self.fourier_strength, orient="horizontal").grid(row=2, column=1, sticky="ew")
-
-        # Adversarial Perturbation Strength
-        ttk.Label(self.settings_frame, text="Adversarial Perturbation:").grid(row=3, column=0, sticky="w")
-        self.adversarial_strength = DoubleVar(value=0.01)
-        ttk.Scale(self.settings_frame, from_=0.001, to=0.1, variable=self.adversarial_strength, orient="horizontal").grid(row=3, column=1, sticky="ew")
-
-        # QR Code Opacity
-        ttk.Label(self.settings_frame, text="QR Code Opacity:").grid(row=4, column=0, sticky="w")
-        self.qr_opacity = DoubleVar(value=0.05)
-        ttk.Scale(self.settings_frame, from_=0.01, to=0.1, variable=self.qr_opacity, orient="horizontal").grid(row=4, column=1, sticky="ew")
-
-        # Preset buttons
-        self.preset_frame = ttk.LabelFrame(master, text="Preset Settings")
-        self.preset_frame.grid(row=1, column=0, columnspan=3, padx=10, pady=10, sticky="nsew")
-
-        ttk.Button(self.preset_frame, text="Recommended", command=self.set_recommended).grid(row=0, column=0, padx=5, pady=5)
-        ttk.Button(self.preset_frame, text="Lighter", command=self.set_lighter).grid(row=0, column=1, padx=5, pady=5)
-        ttk.Button(self.preset_frame, text="Stronger", command=self.set_stronger).grid(row=0, column=2, padx=5, pady=5)
-
-        # Action buttons
-        ttk.Button(master, text="Protect Single Image", command=self.protect_single_image).grid(row=2, column=0, pady=10)
-        ttk.Button(master, text="Batch Protect Images", command=self.batch_protect_images).grid(row=2, column=1, pady=10)
-        ttk.Button(master, text="Verify Image", command=self.verify_image).grid(row=2, column=2, pady=10)
-
-        # Progress bar
-        self.progress_var = DoubleVar()
-        self.progress_bar = ttk.Progressbar(master, variable=self.progress_var, maximum=100)
-        self.progress_bar.grid(row=3, column=0, columnspan=3, pady=10, sticky="ew")
-
-        # Cancel button (hidden by default)
-        self.cancel_button = ttk.Button(master, text="Cancel", command=self.cancel_operation)
-        self.cancel_button.grid(row=4, column=1, pady=10)
-        self.cancel_button.grid_remove()
-
-        self.operation_cancelled = False
-
-    def set_recommended(self):
-        self.dct_strength.set(0.05)
-        self.wavelet_strength.set(0.05)
-        self.fourier_strength.set(0.05)
-        self.adversarial_strength.set(0.01)
-        self.qr_opacity.set(0.05)
-
-    def set_lighter(self):
-        self.dct_strength.set(0.03)
-        self.wavelet_strength.set(0.03)
-        self.fourier_strength.set(0.03)
-        self.adversarial_strength.set(0.005)
-        self.qr_opacity.set(0.03)
-
-    def set_stronger(self):
-        self.dct_strength.set(0.08)
-        self.wavelet_strength.set(0.08)
-        self.fourier_strength.set(0.08)
-        self.adversarial_strength.set(0.02)
-        self.qr_opacity.set(0.08)
-
-    def protect_single_image(self):
-        file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg *.jpeg *.png *.bmp *.tiff *.webp")])
-        if file_path:
-            output_dir = filedialog.askdirectory(title="Select Output Directory")
-            if output_dir:
-                self.progress_var.set(0)
-                self.master.update_idletasks()
-                result = self.protector.protect_image(
-                    file_path, 
-                    output_dir,
-                    dct_strength=self.dct_strength.get(),
-                    wavelet_strength=self.wavelet_strength.get(),
-                    fourier_strength=self.fourier_strength.get(),
-                    adversarial_strength=self.adversarial_strength.get(),
-                    qr_opacity=self.qr_opacity.get()
-                )
-                self.progress_var.set(100)
-                messagebox.showinfo("Result", result)
-
-    def batch_protect_images(self):
-        file_paths = filedialog.askopenfilenames(filetypes=[("Image files", "*.jpg *.jpeg *.png *.bmp *.tiff *.webp")])
-        if file_paths:
-            output_dir = filedialog.askdirectory(title="Select Output Directory")
-            if output_dir:
-                self.progress_var.set(0)
-                self.cancel_button.grid()
-                self.operation_cancelled = False
-                self.master.update_idletasks()
-                
-                batch_process_generator = self.protector.batch_process(
-                    file_paths, 
-                    output_dir,
-                    dct_strength=self.dct_strength.get(),
-                    wavelet_strength=self.wavelet_strength.get(),
-                    fourier_strength=self.fourier_strength.get(),
-                    adversarial_strength=self.adversarial_strength.get(),
-                    qr_opacity=self.qr_opacity.get()
-                )
-                
-                results = []
-                for progress in batch_process_generator:
-                    if self.operation_cancelled:
-                        messagebox.showinfo("Operation Cancelled", "Batch protection was cancelled.")
-                        break
-                    self.progress_var.set(progress * 100)
-                    self.master.update_idletasks()
-                    results.append(progress)
-                
-                self.progress_var.set(100)
-                self.cancel_button.grid_remove()
-                if not self.operation_cancelled:
-                    messagebox.showinfo("Batch Result", f"Processed {len(results)} images.")
-
-    def verify_image(self):
-        file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg *.jpeg *.png *.bmp *.tiff *.webp")])
-        if file_path:
-            result = self.protector.verify_image(file_path)
-            messagebox.showinfo("Verification Result", result)
-
-    def cancel_operation(self):
-        self.operation_cancelled = True
-
+# Example usage
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = AdvancedImageProtectorGUI(root)
-    root.mainloop()
+    protector = AdvancedImageProtector()
+    
+    # Protect a single image
+    result = protector.protect_image("path/to/your/image.jpg")
+    print(result)
+    
+    # Verify a protected image
+    verification_result = protector.verify_image("path/to/protected_image.png")
+    print(verification_result)
+    
+    # Batch process images
+    image_paths = ["path/to/image1.jpg", "path/to/image2.png", "path/to/image3.jpeg"]
+    for progress in protector.batch_process(image_paths):
+        print(f"Progress: {progress * 100:.2f}%")
