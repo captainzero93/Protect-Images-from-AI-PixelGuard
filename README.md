@@ -128,7 +128,7 @@ These techniques work together to create multiple layers of protection that are 
 
 5. **Perceptual Impact**: While the techniques aim to be imperceptible to humans, there may (mostly always) be slight visual changes, especially at higher protection strengths. Users should balance protection strength with acceptable visual quality.
 
-6. **Metadata Preservation**: The current implementation preserves EXIF data for JPEG images. However, not all metadata may be preserved for other formats. Future versions could focus on maintaining more metadata across all supported formats while still applying protections.
+6. **Metadata Preservation**: The current implementation preserves some EXIF data for images. However, not all metadata may be preserved for other formats. Future versions could focus on maintaining more metadata across all supported formats while still applying protections.
 
 ## Potential Improvements
 
