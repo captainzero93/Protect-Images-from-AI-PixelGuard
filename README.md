@@ -7,7 +7,7 @@ AI scraping involves the automated collection of images from the internet for tr
 
 Here's an example of an earlier version of PixelGuard AI:
 
-| Unprotected Image | Protected Image (light preset) |
+| Unprotected Image | Protected Image (light preset from early alpha) |
 |:-----------------:|:---------------:|
 | ![Unprotected](https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard/raw/main/efcsdzecvzdscz.png) | ![Early version Protected](https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard/raw/main/protected_efcsdzecvzdscz.png) |
 
