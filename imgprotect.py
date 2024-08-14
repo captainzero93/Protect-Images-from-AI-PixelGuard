@@ -36,10 +36,9 @@ class AdvancedImageProtector:
         self.supported_formats = {'.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.webp'}
         
         # Load pre-trained ResNet50 model
-        self.model = models.resnet50(pretrained=True)
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.model = models.resnet50(pretrained=True).to(self.device)
         self.model.eval()
-        if torch.cuda.is_available():
-            self.model = self.model.cuda()
         
         # Define image preprocessing
         self.preprocess = transforms.Compose([
@@ -168,9 +167,7 @@ class AdvancedImageProtector:
         logging.debug("Applying adversarial perturbation")
         
         # Convert image to PyTorch tensor
-        img_tensor = self.preprocess(Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))).unsqueeze(0)
-        if torch.cuda.is_available():
-            img_tensor = img_tensor.cuda()
+        img_tensor = self.preprocess(Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))).unsqueeze(0).to(self.device)
         
         # Set requires_grad attribute of tensor
         img_tensor.requires_grad = True
@@ -179,7 +176,7 @@ class AdvancedImageProtector:
         output = self.model(img_tensor)
         
         # Calculate loss
-        loss = torch.nn.functional.cross_entropy(output, torch.tensor([0]).cuda() if torch.cuda.is_available() else torch.tensor([0]))
+        loss = torch.nn.functional.cross_entropy(output, torch.tensor([0]).to(self.device))
         
         # Backward pass
         loss.backward()
@@ -296,9 +293,9 @@ class AdvancedImageProtector:
             current_perceptual_hash = str(imagehash.phash(Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))))
 
             logging.debug(f"Current image hash: {current_hash}")
-            logging.debug(logging.debug(f"Stored image hash: {protection_info['image_hash']}")
-            # logging.debug("Current perceptual hash: {}".format(current_perceptual_hash))
-            # logging.debug(f"Stored perceptual hash: {protection_info['perceptual_hash']}")
+            logging.debug(f"Stored image hash: {protection_info['image_hash']}")
+            logging.debug(f"Current perceptual hash: {current_perceptual_hash}")
+            logging.debug(f"Stored perceptual hash: {protection_info['perceptual_hash']}")
 
             if current_hash != protection_info['image_hash']:
                 return "Image hash mismatch. The image may have been altered."
@@ -461,5 +458,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = AdvancedImageProtectorGUI(root)
     root.mainloop()
-
-                    
