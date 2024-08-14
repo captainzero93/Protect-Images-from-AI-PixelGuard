@@ -35,6 +35,8 @@ Example images do not represent the current protection level. This program is be
 - Compatible with Windows, macOS, and Linux
 - CUDA-enabled GPU (optional, for improved performance)
 
+The script automatically uses CUDA if available, which can significantly speed up the adversarial perturbation process.
+
 ## Installation
 1. Ensure you have Python 3.7 - 3.11 installed. Python 3.11 is the latest supported version. You can check your Python version by running:
    ```
@@ -81,7 +83,9 @@ This will open a GUI with the following options:
 2. Click on "Protect Single Image" or "Batch Protect Images".
 3. Select the image(s) you want to protect.
 4. Choose an output directory for the protected images.
-5. Wait for the process to complete. A success should appear when done, check the Terminal if not.
+5. Wait for the process to complete. A success message will appear in a popup window when done.
+
+The progress bar will update to show the status of the protection process.
 
 ### Verifying Images
 1. Click on "Verify Image".
@@ -90,6 +94,8 @@ This will open a GUI with the following options:
 
 ## Customization
 The GUI allows users to adjust the strength of each protection technique. Use the sliders to fine-tune the balance between protection effectiveness and image quality. You can also use the preset buttons for quick adjustments.
+
+Each protection technique's strength can be adjusted using sliders in the GUI, allowing for fine-tuned control over the protection process.
 
 ## How It Works
 1. **DCT Watermarking**: Embeds a watermark in the frequency domain of the blue channel.
@@ -126,20 +132,17 @@ These techniques work together to create multiple layers of protection that are 
 ## Potential Improvements
 
 1. **Modular Architecture**: Refactoring the protection techniques into separate modules could improve maintainability and allow for easier addition of new techniques or updates to existing ones.
-
 2. **Advanced Steganography**: Implementing more sophisticated steganography techniques could improve the hiding of metadata and increase resistance to statistical analysis.
-
 3. **Enhanced GPU Utilization**: While the current version can use GPU acceleration if available, further optimizations could be made to improve performance on both CPU and GPU systems.
-
 4. **Adaptive Protection**: Developing a system that analyzes images and automatically adjusts protection strength based on content may optimize the balance between protection effectiveness and visual quality.
-
 5. **Comprehensive Testing Suite**: Adding a suite of unit and integration tests would improve reliability, ease future development, and help quickly identify any regressions when making updates.
-
 6. **Enhanced Key Management**: Implementing a more robust key management system could improve the overall security of the cryptographic operations.
-
 7. **Machine Learning Integration**: Incorporating machine learning models to detect and adapt to new AI scraping techniques could provide more dynamic and future-proof protection.
-
 8. **API Development**: Creating an API for the core functionality would allow for easier integration with other software or web services.
+9. **Incremental Progress Bar**: Implementing a more granular progress bar update during batch processing to provide better feedback to users.
+10. **Cancellation Option**: Adding the ability to cancel ongoing protection or verification processes for long-running operations.
+11. **Memory Management**: Implementing better memory management for processing very large images or large batches of images.
+12. **EXIF Data Preservation**: Improving the preservation of original EXIF data while still applying protection information.
 
 ## Updating
 To update PixelGuard AI to the latest version:
