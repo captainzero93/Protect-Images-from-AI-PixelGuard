@@ -297,7 +297,7 @@ class AdvancedImageProtector:
 
             logging.debug(f"Current image hash: {current_hash}")
             logging.debug(logging.debug(f"Stored image hash: {protection_info['image_hash']}")
-            logging.debug("Current perceptual hash: {}".format(current_perceptual_hash))
+            # logging.debug("Current perceptual hash: {}".format(current_perceptual_hash))
             logging.debug(f"Stored perceptual hash: {protection_info['perceptual_hash']}")
 
             if current_hash != protection_info['image_hash']:
