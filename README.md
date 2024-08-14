@@ -95,7 +95,11 @@ The GUI allows users to adjust the strength of each protection technique. Use th
 1. **DCT Watermarking**: Embeds a watermark in the frequency domain of the blue channel.
 2. **Wavelet-based Watermarking**: Embeds a watermark in the wavelet domain of the green channel.
 3. **Fourier Transform Watermarking**: Applies a watermark in the frequency domain of the red channel.
-4. **Adversarial Perturbation**: Uses the Fast Gradient Sign Method (FGSM) with a pre-trained ResNet50 model to add minor perturbations designed to confuse AI models.
+4. **Adversarial Perturbation**: Uses the Fast Gradient Sign Method (FGSM) with a pre-trained ResNet50 model to add minor perturbations designed to confuse AI models. ResNet50 was chosen for several reasons:
+   - It's a well-known and widely used deep learning model for image classification.
+   - It provides a good balance between model complexity and computational efficiency.
+   - As a pre-trained model, it captures a wide range of image features, making the adversarial perturbations more robust against various AI systems.
+   - Its architecture allows for effective gradient computation, which is crucial for the FGSM technique.
 5. **Color Jittering**: Randomly adjusts brightness, contrast, and saturation to add another layer of protection.
 6. **Invisible QR Code**: Embeds an invisible QR code containing image information.
 7. **Steganography**: Hides additional protection data within the image itself.
@@ -103,7 +107,7 @@ The GUI allows users to adjust the strength of each protection technique. Use th
 9. **Hash Verification**: Uses both a cryptographic hash and a perceptual hash to check if the image has been altered.
 10. **Timestamp Verification**: Checks when the image was protected and suggests re-protection if it's too old.
 
-These techniques work together to create multiple layers of protection that are extremely difficult for AI training algorithms to remove or ignore, while remaining imperceptible to human viewers.
+These techniques work together to create multiple layers of protection that are extremely difficult for AI training algorithms to remove or ignore, while remaining imperceptible to human viewers. The use of ResNet50 for adversarial perturbations ensures that the protection is effective against a wide range of AI models, as many modern AI systems use similar architectures or feature extractors.
 
 ## Security Analysis
 
