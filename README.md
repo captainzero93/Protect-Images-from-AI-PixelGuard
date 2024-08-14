@@ -26,9 +26,10 @@ Example images do not represent the current protection level. This program is be
 - **Perceptual Hash** for content change detection
 - **Timestamp Verification** to check the age of protection
 - **Support for Multiple Image Formats**: JPEG, PNG, BMP, TIFF, WebP
-- **Batch Processing**
+- **Batch Processing** with progress tracking and cancellation option
 - **User-friendly GUI** with adjustable protection strengths
 - **Verification Tool** to check if an image has been protected and/or tampered with
+- **EXIF Data Preservation** for JPEG images
 
 ## System Requirements
 - Python 3.7 or higher, but Python <= 3.11 is required
@@ -85,7 +86,7 @@ This will open a GUI with the following options:
 4. Choose an output directory for the protected images.
 5. Wait for the process to complete. A success message will appear in a popup window when done.
 
-The progress bar will update to show the status of the protection process.
+The progress bar will update to show the status of the protection process. For batch processing, you can cancel the operation at any time using the "Cancel" button.
 
 ### Verifying Images
 1. Click on "Verify Image".
@@ -127,7 +128,7 @@ These techniques work together to create multiple layers of protection that are 
 
 5. **Perceptual Impact**: While the techniques aim to be imperceptible to humans, there may (mostly always) be slight visual changes, especially at higher protection strengths. Users should balance protection strength with acceptable visual quality.
 
-6. **Metadata Preservation**: The current implementation may not preserve all original image metadata. Future versions could focus on maintaining important metadata while still applying protections.
+6. **Metadata Preservation**: The current implementation preserves EXIF data for JPEG images. However, not all metadata may be preserved for other formats. Future versions could focus on maintaining more metadata across all supported formats while still applying protections.
 
 ## Potential Improvements
 
@@ -139,10 +140,8 @@ These techniques work together to create multiple layers of protection that are 
 6. **Enhanced Key Management**: Implementing a more robust key management system could improve the overall security of the cryptographic operations.
 7. **Machine Learning Integration**: Incorporating machine learning models to detect and adapt to new AI scraping techniques could provide more dynamic and future-proof protection.
 8. **API Development**: Creating an API for the core functionality would allow for easier integration with other software or web services.
-9. **Incremental Progress Bar**: Implementing a more granular progress bar update during batch processing to provide better feedback to users.
-10. **Cancellation Option**: Adding the ability to cancel ongoing protection or verification processes for long-running operations.
-11. **Memory Management**: Implementing better memory management for processing very large images or large batches of images.
-12. **EXIF Data Preservation**: Improving the preservation of original EXIF data while still applying protection information.
+9. **Further Memory Optimization**: While improvements have been made, further optimizations could be implemented for processing very large images or large batches of images.
+10. **Extended Metadata Preservation**: Improving the preservation of original metadata for all supported image formats while still applying protection information.
 
 ## Updating
 To update PixelGuard AI to the latest version:
@@ -160,6 +159,7 @@ To update PixelGuard AI to the latest version:
 - For image format errors, check that your image is in one of the supported formats.
 - If protection seems too strong or weak, adjust the settings using the GUI sliders.
 - If the protection process is slow, consider using a system with a CUDA-enabled GPU for faster processing, especially for batch operations.
+- For batch operations, if you need to stop the process, use the "Cancel" button.
 
 ## Limitations
 While PixelGuard AI significantly increases protection against AI scraping, it may not be 100% effective against all current and future AI technologies. It's designed to strike a balance between protection and maintaining image quality.
