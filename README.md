@@ -1,3 +1,4 @@
+# warning code is being updated massively atm and may not work at all, please check back in a few hours
 # PixelGuard AI (AI IMAGE PROTECT)
 
 ## Introduction
