@@ -108,7 +108,7 @@ Each protection technique's strength can be adjusted using sliders in the GUI, a
    - As a pre-trained model, it captures a wide range of image features, making the adversarial perturbations more robust against various AI systems.
    - Its architecture allows for effective gradient computation, which is crucial for the FGSM technique.
 5. **Color Jittering**: Randomly adjusts brightness, contrast, and saturation to add another layer of protection.
-6. **Invisible QR Code**: Embeds an invisible QR code containing image information.
+6. **'Invisible' QR Code**: Embeds an invisible QR code containing image information.
 7. **Steganography**: Hides additional protection data within the image itself.
 8. **Digital Signature**: Signs the entire image to detect any tampering.
 9. **Hash Verification**: Uses both a cryptographic hash and a perceptual hash to check if the image has been altered.
