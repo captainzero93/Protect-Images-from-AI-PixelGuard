@@ -165,14 +165,14 @@ To update PixelGuard AI to the latest version:
 While PixelGuard AI significantly increases protection against AI scraping, it may not be 100% effective against all current and future AI technologies. It's designed to strike a balance between protection and maintaining image quality.
 
 ## Contributing
-We welcome contributions! If you'd like to contribute:
+
 1. Fork the repository
 2. Create a new branch for your feature
 3. Commit your changes
 4. Push to your branch
 5. Create a new Pull Request
 
-Please ensure your code adheres to our coding standards and includes appropriate tests.
+Please ensure your code adheres to the coding standards and includes appropriate tests.
 
 ## Caution
 While these protection methods significantly increase the difficulty of using the images for AI training, no protection method is perfect. Always be cautious about sharing personal images online.
