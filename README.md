@@ -188,6 +188,4 @@ This project is available under a dual license:
 
 Please see the [LICENSE](LICENSE) file for full details on both licenses.
 
-For commercial licensing inquiries, please contact: joe.faulkner.0@gmail.com
-
 By using this project, you agree to abide by the terms of the appropriate license based on your intended use.
