@@ -161,13 +161,12 @@ While PixelGuard AI significantly increases protection against AI scraping, it m
 
 ## Contributing
 
-1. Fork the repository
-2. Create a new branch for your feature
-3. Commit your changes
-4. Push to your branch
-5. Create a new Pull Request
+Contributions to improve the scripts are welcome. Please submit pull requests or open issues on the GitHub repository. We especially encourage contributions that:
+- Enhance user-friendliness without compromising security
+- Improve documentation and user guidance
 
-Please ensure your code adheres to the coding standards and includes appropriate tests.
+## Feedback and Issues
+I welcome feedback and bug reports. Please open an issue [GitHub Issues page](https://github.com/captainzero93/Protect-Images-from-AI-PixelGuard/issues) for any problems, questions, or suggestions.
 
 ## Caution
 While these protection methods significantly increase the difficulty of using the images for AI training, no protection method is perfect. Always be cautious about sharing personal images online.
