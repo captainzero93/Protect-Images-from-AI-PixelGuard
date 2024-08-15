@@ -161,7 +161,7 @@ While PixelGuard AI significantly increases protection against AI scraping, it m
 
 ## Contributing
 
-Contributions to improve the scripts are welcome. Please submit pull requests or open issues on the GitHub repository. We especially encourage contributions that:
+Contributions to improve the scripts are welcome. Please submit pull requests or open issues on the GitHub repository. I especially encourage contributions that:
 - Enhance user-friendliness without compromising security
 - Improve documentation and user guidance
 
