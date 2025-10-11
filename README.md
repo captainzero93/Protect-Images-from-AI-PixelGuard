@@ -204,6 +204,7 @@ This project is available under a dual license:
 
 Please see the [LICENSE](LICENSE) file for full details on both licenses.
 
-For commercial licensing cyberjunk77@gmail.com
+For commercial licensing github repo owner
 
 By using this project, you agree to abide by the terms of the appropriate license based on your intended use.
+
