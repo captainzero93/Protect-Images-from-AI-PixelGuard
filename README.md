@@ -21,60 +21,60 @@ Version 2.0 represents a ground-up rewrite with **50+ improvements** over v1.0. 
 
 ### Added - Protection Techniques
 
-#### Multi-Model Adversarial Protection ⭐
+#### Multi-Model Adversarial Protection 
 - Uses multiple neural networks (ResNet50 + VGG16) instead of single model
 - Gradient accumulation from both models for robust perturbations
 - Better generalization across different AI architectures
 - Transferable protection against various AI systems
 
-#### Enhanced Frequency Domain Protection ⭐⭐⭐
+#### Enhanced Frequency Domain Protection 
 - **Multi-channel DCT**: Now operates on all RGB channels (was blue only)
 - **Multi-level Wavelets**: 3-level decomposition (was 1 level)
 - **Fourier Ring Masking**: Targets mid-frequencies specifically with ring masks
 - Better preservation of visual quality while increasing robustness
 
-#### New Spatial Techniques ⭐⭐
+#### New Spatial Techniques 
 - **Texture-Aware Perturbations**: Gradient-based protection using Sobel operators
 - **Strategic Multi-Type Noise**: Combines Gaussian + Salt-and-Pepper + Perlin-like noise
 - **Perceptual Color Shifts**: LAB color space manipulation (was simple HSV)
 - **High-Frequency Masking**: Targets CNN feature extraction specifically
 
-#### New Multi-Scale Protection ⭐⭐
+#### New Multi-Scale Protection 
 - Pyramid-based protection at 3 scales (100%, 50%, 25%)
 - Ensures survival of downsampling common in AI pipelines
 - Blended protection across resolutions
 
 ### Added - Features & Infrastructure
 
-#### Professional CLI Interface ⭐⭐⭐
+#### Professional CLI Interface 
 - Complete command-line interface with argparse
 - Subcommands: `protect`, `verify`, `export-config`
 - Comprehensive help text and examples
 - Progress tracking with tqdm
 - Colored output support
 
-#### Configuration System ⭐⭐⭐
+#### Configuration System 
 - JSON-based configuration files
 - Three presets included: subtle, balanced, maximum
 - Load/save/export configurations
 - Override system for command-line arguments
 - Reusable settings across runs
 
-#### Batch Processing & Parallelization ⭐⭐⭐
+#### Batch Processing & Parallelization 
 - Multi-threaded processing with ProcessPoolExecutor
 - Configurable worker count (auto-detects CPU cores)
 - Progress bars with real-time updates
 - Error handling per image
 - Summary statistics
 
-#### Key Management System ⭐⭐⭐
+#### Key Management System 
 - Persistent RSA-4096 key storage (upgraded from 2048)
 - Auto-generation on first run
 - Secure PEM format serialization
 - Keys stored in dedicated `keys/` directory
 - Proper public/private key separation
 
-#### Enhanced Verification ⭐⭐⭐
+#### Enhanced Verification 
 - **4 hash types**: SHA-256, perceptual hash, average hash, difference hash
 - **Graduated status levels**: VERIFIED, LIKELY_AUTHENTIC, MODIFIED, TAMPERED
 - Hash difference calculation
@@ -82,7 +82,7 @@ Version 2.0 represents a ground-up rewrite with **50+ improvements** over v1.0. 
 - JSON output option
 - Detailed reporting
 
-#### Documentation Suite ⭐⭐⭐
+#### Documentation Suite 
 - **PROJECT_SUMMARY.md**: Complete package overview
 - **QUICKSTART.md**: 5-minute setup guide
 - **README.md**: Comprehensive manual (updated to match original style)
@@ -91,14 +91,14 @@ Version 2.0 represents a ground-up rewrite with **50+ improvements** over v1.0. 
 - **IMPROVEMENTS.md**: All 50+ enhancements listed
 - **This CHANGELOG**: Version history
 
-#### Testing & Development ⭐⭐
+#### Testing & Development 
 - **test_protector.py**: Complete test suite
 - Creates test images automatically
 - Validates all features
 - Dependency checking
 - Installation verification
 
-#### Helper Scripts ⭐⭐
+#### Helper Scripts 
 - **batch_protect.sh**: Bash script for easy batch processing
 - Auto CPU detection
 - Pretty colored output
@@ -262,9 +262,6 @@ Version 2.0 represents a ground-up rewrite with **50+ improvements** over v1.0. 
 
 ---
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
 ## [1.0.0] - 2024-12-01
 
 ### Initial Release
@@ -381,11 +378,6 @@ Special thanks to:
 
 ---
 
-**For detailed technical information, see [TECHNICAL.md](TECHNICAL.md)**
-
-**For quick start, see [QUICKSTART.md](QUICKSTART.md)**
-
-**For complete documentation, see [README.md](README.md)**
 ## License
 
 This project is available under a dual license:
@@ -399,6 +391,7 @@ Please see the [LICENSE](LICENSE) file for full details on both licenses.
 For commercial licensing github repo owner
 
 By using this project, you agree to abide by the terms of the appropriate license based on your intended use.
+
 
 
 
