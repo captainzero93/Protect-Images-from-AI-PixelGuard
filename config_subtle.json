@@ -1,0 +1,28 @@
+{
+  "_comment": "SUBTLE PRESET - Nearly Invisible Protection for Photography",
+  "_description": "Minimal visible artifacts, good for photos shared online, social media, and general photography where quality is paramount",
+  "_use_case": "Portrait photography, landscape photos, social media images, professional photography portfolios",
+  
+  "dct_strength": 0.05,
+  "wavelet_strength": 0.04,
+  "fourier_strength": 0.05,
+  "adversarial_strength": 0.01,
+  "qr_opacity": 0.02,
+  "noise_strength": 0.01,
+  "color_shift_strength": 0.03,
+  
+  "use_adversarial": true,
+  "use_frequency_masking": true,
+  "use_texture_synthesis": true,
+  "use_multi_scale": true,
+  
+  "jpeg_quality": 96,
+  "png_compression": 6,
+  "preserve_quality": true,
+  
+  "add_visible_watermark": false,
+  "watermark_text": "",
+  
+  "batch_size": 8,
+  "output_format": "same"
+}
